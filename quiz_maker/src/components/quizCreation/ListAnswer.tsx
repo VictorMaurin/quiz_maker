@@ -33,12 +33,9 @@ const ListAnswer = ({
     }
   };
 
-  console.log({ listUserAnswer });
-
   const getAnswerColor = (answer: string) => {
     if (!submited) return answer === answerSelected ? 'bg-green-500' : '';
     const answerFromUser = listUserAnswer[questionIndex];
-    console.log({ answerFromUser, correctAnswer, answerSelected });
     if (answer !== answerFromUser && answer !== correctAnswer) return '';
     if (answer === answerFromUser) {
       if (answerFromUser === correctAnswer) return 'bg-green-500';

@@ -1,6 +1,6 @@
 
 export type QuestionParam = {
-    difficulty:  string
+    difficulty: string     
     categoryId: number
 }
 

@@ -19,11 +19,7 @@ const QuizLayout = () => {
   const { setQuestionParam, refetchQuestions, listQuestions } =
     useQuizAnswerContext();
 
-  console.log('ok');
-
   const showQuestion = listQuestions?.results.length;
-
-  console.log('showQuestion : ', showQuestion);
 
   if (isPending) return <Spinner />;
 

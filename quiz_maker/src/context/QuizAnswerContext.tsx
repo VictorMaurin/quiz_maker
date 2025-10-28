@@ -5,7 +5,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { createContext, type ReactNode, useMemo, useState } from 'react';
 
-type QuizContextType = {
+type QuizContext = {
   submited: boolean;
   setSubmited: (submited: boolean) => void;
   refetchQuestions: () => void;
@@ -32,7 +32,11 @@ const fetchListQuestions = (
     .then(res => res.data);
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const QuizAnswerContext = createContext<QuizContextType | null>(null);
+export const QuizAnswerContext = createContext<QuizContext | null>(null);
+
+const decodeString = (text: string) =>
+  new DOMParser().parseFromString(text, 'text/html').documentElement
+    .textContent;
 
 export const QuizProvider = ({ children }: { children: ReactNode }) => {
   const queryClient = useQueryClient();
@@ -47,7 +51,6 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
     queryFn: () =>
       fetchListQuestions(questionParam.categoryId, questionParam.difficulty),
     enabled: false,
-    staleTime: 0,
   });
   const [listUserAnswer, setListUserAnswer] = useState<string[]>(
     questionData ? new Array(questionData.results.length) : [],
@@ -59,8 +62,8 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
         question: listQuestions.question,
         correctAnswer: listQuestions.correct_answer,
         listShuffledAnswer: shuffle([
-          listQuestions.correct_answer,
-          ...listQuestions.incorrect_answers,
+          decodeString(listQuestions.correct_answer),
+          ...listQuestions.incorrect_answers.map(decodeString),
         ]),
       })),
     [questionData],
@@ -69,6 +72,7 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
   const clearData = () => {
     queryClient.removeQueries({ queryKey: ['questions'] });
   };
+
   return (
     <QuizAnswerContext.Provider
       value={{

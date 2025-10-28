@@ -4,8 +4,13 @@ import { Button } from '@/components/ui/button';
 import ListQuestion from '../quizCreation/ListQuestion';
 
 const ListAnswerSubmited = () => {
-  const { listQuestions, setQuestionParam, clearData, listUserAnswer } =
-    useQuizAnswerContext();
+  const {
+    listQuestions,
+    setQuestionParam,
+    clearData,
+    listUserAnswer,
+    setListUserAnswer,
+  } = useQuizAnswerContext();
   const goodAnswers =
     listQuestions?.results.filter(
       (question, questionIndex) =>
@@ -20,6 +25,7 @@ const ListAnswerSubmited = () => {
 
   const onSumbit = () => {
     setQuestionParam({ categoryId: 0, difficulty: '' });
+    setListUserAnswer([]);
     clearData();
   };
   if (!listQuestions) return null;
@@ -30,7 +36,7 @@ const ListAnswerSubmited = () => {
       <div
         className={`w-50 text-center font-bold ${getColor()} text-white p-2 mb-4 mt-4`}
       >
-        You score {goodAnswers} out of {listQuestions?.results.length}
+        You scored {goodAnswers} out of {listQuestions?.results.length}
       </div>
       <Link to="/">
         <Button onClick={onSumbit} className="w-50">
