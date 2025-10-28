@@ -16,7 +16,7 @@ type SelectQuizProps = {
   onSumbit: () => void;
 };
 
-const SelectQuiz = ({
+const QuizForm = ({
   listCategory,
   handleSetQuestionParams,
   onSumbit,
@@ -68,4 +68,4 @@ const SelectQuiz = ({
   );
 };
 
-export default SelectQuiz;
+export default QuizForm;

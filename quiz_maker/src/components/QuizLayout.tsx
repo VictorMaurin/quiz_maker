@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Spinner } from '@/components/ui/spinner';
 
 import axios from 'axios';
-import SelectQuiz from './quizCreation/SelectQuiz';
+import QuizForm from './quizCreation/QuizForm';
 import ListQuestion from './quizCreation/ListQuestion';
 import useQuizAnswerContext from '@/context/useQuizAnswerContext';
 
@@ -32,7 +32,7 @@ const QuizLayout = () => {
   return (
     <>
       <h1 className="mb-5">QUIZ MAKER</h1>
-      <SelectQuiz
+      <QuizForm
         listCategory={data.trivia_categories}
         handleSetQuestionParams={setQuestionParam}
         onSumbit={() => {
