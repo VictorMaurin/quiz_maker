@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import QuizLayout from './components/QuizLayout';
 import { QuizProvider } from './context/QuizAnswerContext';
-import ListAnswerSubmited from './components/quizAnswer/ListAnswerSubmited';
+import ListAnswerSubmited from './components/quizSubmit/ListAnswerSubmited';
 
 // Create a client
 const queryClient = new QueryClient();
