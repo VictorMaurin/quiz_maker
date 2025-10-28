@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="quiz_maker">
       <QueryClientProvider client={queryClient}>
         <QuizProvider>
           <Routes>

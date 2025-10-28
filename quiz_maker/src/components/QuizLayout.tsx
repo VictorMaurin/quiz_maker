@@ -16,24 +16,32 @@ const QuizLayout = () => {
     queryKey: ['categories'],
     queryFn: fetchListCategory,
   });
-  const { setQuestionParam, refetchQuestions, listQuestions } =
-    useQuizAnswerContext();
+  const {
+    setQuestionParam,
+    refetchQuestions,
+    listQuestions,
+    setListUserAnswer,
+  } = useQuizAnswerContext();
 
   const showQuestion = listQuestions?.results.length;
 
   if (isPending) return <Spinner />;
 
   if (error) return 'An error has occurred: ' + error.message;
+
   return (
     <>
       <h1 className="mb-5">QUIZ MAKER</h1>
       <SelectQuiz
         listCategory={data.trivia_categories}
         handleSetQuestionParams={setQuestionParam}
-        onSumbit={() => refetchQuestions()}
+        onSumbit={() => {
+          setListUserAnswer([]);
+          refetchQuestions();
+        }}
       />
       {showQuestion ? (
-        <ListQuestion data={listQuestions!} submited={false} />
+        <ListQuestion data={listQuestions} submited={false} />
       ) : (
         <></>
       )}
