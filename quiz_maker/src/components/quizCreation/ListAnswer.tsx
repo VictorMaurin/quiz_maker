@@ -15,11 +15,10 @@ const ListAnswer = ({
   listAnswer,
   questionIndex,
 }: ListAnswerProps) => {
+  const { setListUserAnswer, listUserAnswer } = useQuizAnswerContext();
   const [answerSelected, setSelectedAnswer] = useState<string | undefined>(
     undefined,
   );
-
-  const { setListUserAnswer, listUserAnswer } = useQuizAnswerContext();
 
   const selectAnswer = (answer: string) => {
     if (!submited) {
